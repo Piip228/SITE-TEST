@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основы деплоя — Интерактивное руководство</title>
+    <style>
+        /* CSS-переменные для удобной настройки цветов */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-success: #34d399;
+            --border-color: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Шапка сайта */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Сетка с карточками */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--accent-success);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Интерактивный чек-лист для студента */
+        .checklist-section {
+            margin-top: 50px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .checklist-section h2 {
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .todo-item input {
+            margin-right: 15px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-success);
+            cursor: pointer;
+        }
+
+        /* Эффект зачеркивания при выборе чекбокса (чистый CSS) */
+        .todo-item input:checked + span {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        /* Имитация терминала */
+        .terminal {
+            background-color: #020617;
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            margin-top: 15px;
+            border-left: 4px solid var(--accent);
+            overflow-x: auto;
+        }
+
+        .terminal-line {
+            color: #38bdf8;
+        }
+
+        .terminal-comment {
+            color: #64748b;
+        }
+
+        /* Подвал */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Шапка -->
+        <header>
+            <h1>Deploy Sandbox</h1>
+            <p>Учебная площадка: от локального файла до публикации в сети</p>
+        </header>
+
+        <!-- Основная часть -->
+        <main>
+            
+            <!-- Сетка теории -->
+            <section class="grid">
+                <div class="card">
+                    <h3><span>📦</span> 1. Подготовка</h3>
+                    <p>Убедитесь, что ваш главный файл называется именно <code>index.html</code>. Сервер ищет его по умолчанию при запросе к корневой директории.</p>
+                </div>
+                
+                <div class="card">
+                    <h3><span>🌐</span> 2. Домен и DNS</h3>
+                    <p>Домен — это имя сайта (например, mysite.com). DNS-серверы переводят это буквенное имя в числовой IP-адрес вашего сервера.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span>🚀</span> 3. Хостинг</h3>
+                    <p>Место, где физически хранятся файлы сайта. Для статичных HTML-страниц отлично подходят бесплатные сервисы (GitHub Pages, Netlify, Vercel).</p>
+                </div>
+            </section>
+
+            <!-- Чек-лист деплоя -->
+            <section class="checklist-section">
+                <h2>Практический чек-лист</h2>
+                
+                <label class="todo-item">
+                    <input type="checkbox">
+                    <span>Переименовать стартовый файл в index.html</span>
+                </label>
+                
+                <label class="todo-item">
+                    <input type="checkbox">
+                    <span>Проверить относительные пути к картинкам и CSS стилям</span>
+                </label>
+                
+                <label class="todo-item">
+                    <input type="checkbox">
+                    <span>Создать репозиторий на GitHub (или подготовить архив с файлами)</span>
+                </label>
+                
+                <label class="todo-item">
+                    <input type="checkbox">
+                    <span>Загрузить файлы на хостинг-провайдер</span>
+                </label>
+
+                <label class="todo-item">
+                    <input type="checkbox">
+                    <span>Открыть полученную ссылку и проверить работоспособность</span>
+                </label>
+
+                <!-- Блок кода / Терминал -->
+                <div class="terminal">
+                    <div class="terminal-comment"># Пример деплоя через Git в терминале</div>
+                    <div><span class="terminal-line">$</span> git add .</div>
+                    <div><span class="terminal-line">$</span> git commit -m "feat: ready for deploy"</div>
+                    <div><span class="terminal-line">$</span> git push origin main</div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Подвал -->
+        <footer>
+            <p>Создано для демонстрации структуры HTML/CSS. Изменяйте код, чтобы изучить принципы работы разметки.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
